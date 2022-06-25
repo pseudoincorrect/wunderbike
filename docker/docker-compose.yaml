@@ -1,0 +1,68 @@
+version: "2"
+
+networks:
+  backend-net:
+    driver: bridge
+
+volumes:
+  wunderbike_data:
+
+services:
+
+  # frontend:
+  #   build:
+  #     context: ../frontend/wunderbike
+  #     dockerfile: Dockerfile
+  #   container_name: frontend
+  #   working_dir: /home/node/app
+  #   volumes:
+  #     - ../frontend/wunderbike:/home/node/app
+  #     - /home/node/app/node_modules
+  #   ports:
+  #     - "80:80"
+  #   command: "npm run dev"
+
+  # backend:
+  #   build:
+  #     context: ../backend/
+  #     target: development-build-stage
+  #     dockerfile: Dockerfile
+  #   container_name: backend
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - ../backend/:/app
+  #     - /app/node_modules
+  #   restart: 'unless-stopped'
+  #   networks:
+  #     - backend-net
+  #   links:
+  #     - postgresql
+  #   depends_on:
+  #     - postgresql
+  #   command: "npm run start"
+      
+  postgresql:
+    image: postgres:14-alpine
+    container_name: postgresql
+    restart: always
+    environment:
+      POSTGRES_DB: wunderbike
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - wunderbike_data:/var/lib/postgresql/data
+      - ./postgresql:/docker-entrypoint-initdb.d
+    networks:
+      - backend-net
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
+    networks:
+      - backend-net

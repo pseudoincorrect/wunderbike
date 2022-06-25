@@ -1,0 +1,6 @@
+# compiled output
+.vscode
+/node_modules
+.next
+# code formatter
+.eslintrc
