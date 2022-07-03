@@ -2,6 +2,9 @@
 Thumbs.db
 ehthumbs.db
 
+# typescript build directory
+dist
+
 # Folder config file
 Desktop.ini
 

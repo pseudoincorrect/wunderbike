@@ -31,4 +31,8 @@ exports.router = router;
 const user_1 = require("../controllers/user");
 const user = new user_1.UserController();
 // Router.post('/login', user.login);
-router.post('/register', user.register);
+router
+    .post('/register', user.register)
+    .get('/details/:id', user.detail)
+    .delete('/:id', user.delete)
+    .post('/login', user.login);

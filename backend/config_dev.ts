@@ -1,3 +1,6 @@
+// These secrets are for local development
+// Not to be used for production
+
 const config = {
   database: {
     host: 'localhost',
@@ -10,4 +13,4 @@ const config = {
   secret: 'sEcReT',
 };
 
-export {config}
+export { config };

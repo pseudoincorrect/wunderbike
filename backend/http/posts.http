@@ -1,0 +1,47 @@
+
+@host = http://localhost:3000
+@post_id = dd0aa162-1e6b-46b8-9fd5-fff6b278f711
+@token = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImhVeW16TkllbW1IT0prQjltb3RLZiJ9.eyJpc3MiOiJodHRwczovL3Nscy1jb2RpbmdseS5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjJiYmZjNDkwMzRlZWNmOTk4MDdjOTFjIiwiYXVkIjpbImh0dHBzOi8vZG9ybWF3dW5kZXJiaWtlLmNvbSIsImh0dHBzOi8vc2xzLWNvZGluZ2x5LmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2NTY4Njk5OTgsImV4cCI6MTY1Njk1NjM5OCwiYXpwIjoiUmJqQVg3NFh3UWZzNDd3SEFpeTVBVXFqZ0hsc3JxdEUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIGFkZHJlc3MgcGhvbmUiLCJndHkiOiJwYXNzd29yZCJ9.i7USTEf-LFCTA8kqDsHNQ4yRPIAw_L_07O38rl9BmS7aiaX_CQKlpqfZrd0Z_wb8C6Yxa2lIjm76ia4yBZRJy_BN2unEADsWxXH-C3dn8Vi8EQBDmyaHLRQrkKGaNAbAJiTx_-nBcb125fgfoKsnTAvRMM3ph8wK8XaGRL3s_oQCsLS4jJjmpvVjTnlR_KebN9fISOk_ilroYdv8UmeTGtD-Oo-o_BUDYplQULU7Imw7Z_otT1lPYynDOLJc3i7sgG4THUjQfTyoII-nptL3EbRzTTG7kSYH6Feu9OHngeOksVKgpuAe4oUqVA55RcyfPEg_hLXq3NWcuU3pmy-AvA
+
+
+### public route
+GET {{host}}/public
+
+### authenticated
+GET {{host}}/authenticated
+Authorization: Bearer {{token}}
+
+### Create a post
+POST {{host}}/posts
+Authorization: Bearer {{token}}
+content-type: application/json
+
+{
+"title": "Post One",
+"description": "The first post ever",
+"imageUrl": "https://raw.githubusercontent.com/pseudoincorrect/Bariot/main/assets/images/bariot_img.jpg"
+} 
+
+### Get a post
+GET {{host}}/posts/{{post_id}}
+Authorization: Bearer {{token}}
+
+### Get all posts
+GET {{host}}/posts/all
+Authorization: Bearer {{token}}
+
+### Update a post
+PUT {{host}}/posts/{{post_id}}
+Authorization: Bearer {{token}}
+content-type: application/json
+
+{
+"title": "Post One Again",
+"description": "The first post ever updated",
+"imageUrl": "https://github.com/pseudoincorrect/Wootch/raw/master/Support/readme_assets/wootch_on.jpg"
+} 
+
+
+### Delete a post
+DELETE {{host}}/posts/{{post_id}}
+Authorization: Bearer {{token}}
