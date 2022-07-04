@@ -4,6 +4,12 @@
   },
   "cSpell.words": [
     "codingly",
-    "jwks"
-  ]
+    "jwks",
+    "nextjs"
+  ],
+  "rest-client.environmentVariables": {
+    "$development": {
+      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImhVeW16TkllbW1IT0prQjltb3RLZiJ9.eyJpc3MiOiJodHRwczovL3Nscy1jb2RpbmdseS5ldS5hdXRoMC5jb20vIiwic3ViIjoibG42UHlobE9pRktHOFVEeXhOTW11YXVzR1Myczd0Q2FAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vZG9ybWF3dW5kZXJiaWtlLmNvbSIsImlhdCI6MTY1Njk0MzYyMiwiZXhwIjoxNjU3MDMwMDIyLCJhenAiOiJsbjZQeWhsT2lGS0c4VUR5eE5NbXVhdXNHUzJzN3RDYSIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.NB2xcBD7l97RJSEXP5e1n9JtP6LW90x5jS1IEbGbeUnOQQcOPHAoMpJXSrDwL96pB7fva2WSoCsL9_mAWOJcGN55dQbGXfdUBRbODqfVn2FiA8MPWf-zG8WuddjjW87uVpNSSuyWiMT0LP379vLhX7cSCCUCFq840VJJhk1plqjRrN_RHCaAQzjcr9sn9wNwElnEdvh7_B5uKQ0jwwuBtzIPXYqoURYuKzMV1oB3zgILM7iq80Dc4FeBS3JBxNUUzSCBCgGuRdTt05d5w_TVVhPEmB5LLIZrij0iGQu5Bw1xvnYjV9YK7gU66jm33GSEDC4Bk74ZcX2pc0a35hjFAg",
+    }
+  }
 }

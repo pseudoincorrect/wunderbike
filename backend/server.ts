@@ -9,7 +9,7 @@ const http = require('http');
 const debug = Debug('app:server');
 const app = express();
 const server = http.Server(app);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {
   debug('Server Started. *:%o', PORT);
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // HealthCheck
-app.get('/ping', (req: any, res: any) => {
+app.get('/api/ping', (req: any, res: any) => {
   res.send('pong');
 });
 
@@ -27,12 +27,12 @@ app.get('/ping', (req: any, res: any) => {
 app.use(checkJwt);
 
 // Authentication test route
-app.get('/authenticated', (req: any, res: any) => {
+app.get('/api/authenticated', (req: any, res: any) => {
   console.log(req.auth);
   res.json({ message: 'user ' + req.auth.sub + ' is authenticated' });
 });
 
 // Tricks related routes
-app.use('/tricks', trickRouter);
+app.use('/api/tricks', trickRouter);
 
 app.use(errorMid);

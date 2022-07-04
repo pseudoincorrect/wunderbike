@@ -11,8 +11,8 @@ const tricks = new TricksAccess();
 
 class TricksController {
   /**
-   * validate an object containing the data to create a post model
-   * @param data object containing post model data
+   * validate an object containing the data to create a trick model
+   * @param data object containing trick model data
    * @returns if it is valid
    */
   private modelRequestIsValid(data: any): boolean {
@@ -27,27 +27,27 @@ class TricksController {
   }
 
   /**
-   * HTTP handler to add a post into data store
+   * HTTP handler to add a trick into data store
    */
   async add(req: any, res: any, next: any) {
     let data = req.body;
     if (!this.modelRequestIsValid(data)) {
-      return next(new httpErr.BadRequest('Invalid Add post request'));
+      return next(new httpErr.BadRequest('Invalid Add trick request'));
     }
     try {
-      let postModel = fromRequestToModel(data);
-      postModel.userId = req.auth.sub;
-      debug('postModel', postModel);
-      let addedTricks = await tricks.add(postModel);
-      res.send({ status: 'created', post: addedTricks });
+      let trickModel = fromRequestToModel(data);
+      trickModel.userId = req.auth.sub;
+      debug('trickModel', trickModel);
+      let addedTricks = await tricks.add(trickModel);
+      res.send({ status: 'created', trick: addedTricks });
     } catch (e) {
-      return next(new httpErr.InternalServerError('Cannot Add post '));
+      return next(new httpErr.InternalServerError('Cannot Add trick '));
     }
   }
 
   /**
-   * Validate a post ID string
-   * @param id post ID
+   * Validate a trick ID string
+   * @param id trick ID
    * @returns whether it is a valid ID
    */
   private byIdRequestIsValid(id: string): boolean {
@@ -58,7 +58,7 @@ class TricksController {
   }
 
   /**
-   * HTTP handler to get a post by its ID from data store
+   * HTTP handler to get a trick by its ID from data store
    */
   async getById(req: any, res: any, next: any) {
     let id = req.params.id;
@@ -67,9 +67,9 @@ class TricksController {
     }
     try {
       let model = await tricks.getById(id);
-      res.send({ post: model });
+      res.send({ trick: model });
     } catch (e: any) {
-      return next(new httpErr.InternalServerError('Cannot Get post '));
+      return next(new httpErr.InternalServerError('Cannot Get trick '));
     }
   }
 
@@ -81,11 +81,11 @@ class TricksController {
       let models = await tricks.getAll();
       res.send({ tricks: models });
     } catch (e: any) {
-      return next(new httpErr.InternalServerError('Cannot Get All post '));
+      return next(new httpErr.InternalServerError('Cannot Get All trick '));
     }
   }
   /**
-   * HTTP handler to update a post
+   * HTTP handler to update a trick
    */
   async update(req: any, res: any, next: any) {
     let id = req.params.id;
@@ -97,26 +97,26 @@ class TricksController {
     let data = req.body;
     if (!this.modelRequestIsValid(data)) {
       return next(
-        new httpErr.BadRequest('Invalid data for Update post request')
+        new httpErr.BadRequest('Invalid data for Update trick request')
       );
     }
     try {
       let model = fromRequestToModel(data);
-      model.id = data.id;
+      model.id = id;
       debug(model);
       let updatedModel = await tricks.update(model);
       res.send({
-        post_status: 'updated',
-        old_post: model,
-        new_post: updatedModel,
+        trick_status: 'updated',
+        old_trick: model,
+        new_trick: updatedModel,
       });
     } catch (e: any) {
-      return next(new httpErr.InternalServerError('Cannot Update post '));
+      return next(new httpErr.InternalServerError('Cannot Update trick '));
     }
   }
 
   /**
-   * HTTP Handler to delete a post from data store
+   * HTTP Handler to delete a trick from data store
    */
   async delete(req: any, res: any, next: any) {
     let id = req.params.id;
@@ -125,9 +125,9 @@ class TricksController {
     }
     try {
       let tricksModel = await tricks.delete(id);
-      res.send({ post_status: 'deleted', deleted_post: tricksModel });
+      res.send({ trick_status: 'deleted', deleted_trick: tricksModel });
     } catch (e: any) {
-      return next(new httpErr.InternalServerError('Cannot Delete post '));
+      return next(new httpErr.InternalServerError('Cannot Delete trick '));
     }
   }
 } // TricksController class

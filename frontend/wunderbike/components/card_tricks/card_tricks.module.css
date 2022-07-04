@@ -1,0 +1,22 @@
+.cardTrickContainer{
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTrick{
+  width: 18rem;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.imageTrick{
+  width: 100%;
+}
+
+.descriptionTrick{
+  word-break: break-all;
+  white-space: normal;
+  text-align: justify;
+}

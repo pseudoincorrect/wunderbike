@@ -9,18 +9,18 @@ volumes:
 
 services:
 
-  # frontend:
-  #   build:
-  #     context: ../frontend/wunderbike
-  #     dockerfile: Dockerfile
-  #   container_name: frontend
-  #   working_dir: /home/node/app
-  #   volumes:
-  #     - ../frontend/wunderbike:/home/node/app
-  #     - /home/node/app/node_modules
-  #   ports:
-  #     - "80:80"
-  #   command: "npm run dev"
+  frontend:
+    build:
+      context: ../frontend/wunderbike
+      dockerfile: Dockerfile
+    container_name: frontend
+    working_dir: /home/node/app
+    volumes:
+      - ../frontend/wunderbike:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - "80:80"
+    command: "npm run start"
 
   # backend:
   #   build:
