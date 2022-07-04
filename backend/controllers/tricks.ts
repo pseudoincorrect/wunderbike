@@ -1,16 +1,15 @@
 import Debug from 'debug';
-import express from 'express';
-import * as validation from 'validator';
-const val = validation.default;
 import * as httpErr from 'http-errors';
+import * as validation from 'validator';
 
-import { PostsAccess } from '../database/posts';
-import { fromRequestToModel } from '../models/post';
+import { TricksAccess } from '../database/tricks';
+import { fromRequestToModel } from '../models/trick';
 
-const debug = Debug('app:controller:posts');
-const posts = new PostsAccess();
+const val = validation.default;
+const debug = Debug('app:controller:tricks');
+const tricks = new TricksAccess();
 
-class PostsController {
+class TricksController {
   /**
    * validate an object containing the data to create a post model
    * @param data object containing post model data
@@ -39,8 +38,8 @@ class PostsController {
       let postModel = fromRequestToModel(data);
       postModel.userId = req.auth.sub;
       debug('postModel', postModel);
-      let addedPosts = await posts.add(postModel);
-      res.send({ status: 'created', post: addedPosts });
+      let addedTricks = await tricks.add(postModel);
+      res.send({ status: 'created', post: addedTricks });
     } catch (e) {
       return next(new httpErr.InternalServerError('Cannot Add post '));
     }
@@ -64,10 +63,10 @@ class PostsController {
   async getById(req: any, res: any, next: any) {
     let id = req.params.id;
     if (!this.byIdRequestIsValid(id)) {
-      return next(new httpErr.BadRequest('Invalid getById posts request'));
+      return next(new httpErr.BadRequest('Invalid getById tricks request'));
     }
     try {
-      let model = await posts.getById(id);
+      let model = await tricks.getById(id);
       res.send({ post: model });
     } catch (e: any) {
       return next(new httpErr.InternalServerError('Cannot Get post '));
@@ -75,12 +74,12 @@ class PostsController {
   }
 
   /**
-   * HTTP Handler to get all posts from data store
+   * HTTP Handler to get all tricks from data store
    */
   async getAll(req: any, res: any, next: any) {
     try {
-      let models = await posts.getAll();
-      res.send({ posts: models });
+      let models = await tricks.getAll();
+      res.send({ tricks: models });
     } catch (e: any) {
       return next(new httpErr.InternalServerError('Cannot Get All post '));
     }
@@ -92,7 +91,7 @@ class PostsController {
     let id = req.params.id;
     if (!this.byIdRequestIsValid(id)) {
       return next(
-        new httpErr.BadRequest('Invalid id for Update posts request')
+        new httpErr.BadRequest('Invalid id for Update tricks request')
       );
     }
     let data = req.body;
@@ -103,9 +102,9 @@ class PostsController {
     }
     try {
       let model = fromRequestToModel(data);
-      model.id = id;
+      model.id = data.id;
       debug(model);
-      let updatedModel = await posts.update(model);
+      let updatedModel = await tricks.update(model);
       res.send({
         post_status: 'updated',
         old_post: model,
@@ -122,15 +121,15 @@ class PostsController {
   async delete(req: any, res: any, next: any) {
     let id = req.params.id;
     if (!this.byIdRequestIsValid(id)) {
-      return next(new httpErr.BadRequest('Invalid delete posts request'));
+      return next(new httpErr.BadRequest('Invalid delete tricks request'));
     }
     try {
-      let postsModel = await posts.delete(id);
-      res.send({ post_status: 'deleted', deleted_post: postsModel });
+      let tricksModel = await tricks.delete(id);
+      res.send({ post_status: 'deleted', deleted_post: tricksModel });
     } catch (e: any) {
       return next(new httpErr.InternalServerError('Cannot Delete post '));
     }
   }
-} // PostsController class
+} // TricksController class
 
-export { PostsController };
+export { TricksController };

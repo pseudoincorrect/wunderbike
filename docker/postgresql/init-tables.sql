@@ -1,4 +1,4 @@
-create table posts (
+create table tricks (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   created_at timestamp with time zone DEFAULT now(),
   title character varying(4096) NOT NULL,

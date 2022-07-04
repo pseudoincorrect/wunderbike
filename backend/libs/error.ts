@@ -1,5 +1,7 @@
-module.exports = function ErrorMiddleware(err: any, req: any, res:any, next: any) {
-  res.status(err.status);
-  res.json(err);
-  // next(err);
-};
+function errorMid(error: any, req: any, res: any, next: any) {
+  console.log(`error ${error.message}`); // log the error
+  const status = error.status || 400;
+  res.status(status).json({ message: error.message });
+}
+
+export { errorMid };

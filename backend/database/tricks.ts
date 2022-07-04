@@ -1,22 +1,27 @@
 import Debug from 'debug';
-const debug = Debug('app:database:posts');
-import { fromDbToModel, Post } from '../models/post';
-import { pool } from '../libs/db';
-const encryptPassword = require('../libs/secret').encryptPassword;
 
-const table = 'posts';
+import { pool } from '../libs/db';
+import { fromDbToModel, Trick } from '../models/trick';
+
+const debug = Debug('app:database:tricks');
+const table = 'tricks';
 
 /**
- * Class to manage the access to Posts in database
+ * Class to manage the access to Trick in database
  */
-class PostsAccess {
+class TricksAccess {
   /**
-   * Add a post to the DB
-   * @param post model
-   * @returns a post models
+   * Add a trick to the DB
+   * @param trick model
+   * @returns a trick models
    */
-  async add(post: Post): Promise<Post> {
-    let postVal = [post.title, post.description, post.userId, post.imageUrl];
+  async add(trick: Trick): Promise<Trick> {
+    let trickVal = [
+      trick.title,
+      trick.description,
+      trick.userId,
+      trick.imageUrl,
+    ];
     let res: any;
     try {
       res = await pool.query(
@@ -25,29 +30,29 @@ class PostsAccess {
           ' (title, description, user_id, image_url)' +
           ' VALUES ($1, $2, $3, $4)' +
           ' RETURNING *',
-        postVal
+        trickVal
       );
     } catch (error: any) {
       debug(error);
       throw error;
     }
     const row = res.rows[0];
-    let postModel;
+    let trickModel;
     try {
-      postModel = fromDbToModel(row);
+      trickModel = fromDbToModel(row);
     } catch (error) {
       debug(error);
-      throw 'Could not save post';
+      throw 'Could not save trick';
     }
-    return postModel;
+    return trickModel;
   }
 
   /**
-   * Get a post from DB by ID
-   * @param id post Id
-   * @returns a post model
+   * Get a trick from DB by ID
+   * @param id trick Id
+   * @returns a trick model
    */
-  async getById(id: string): Promise<Post> {
+  async getById(id: string): Promise<Trick> {
     let res;
     try {
       res = await pool.query(
@@ -59,21 +64,21 @@ class PostsAccess {
       throw error;
     }
     const row = res.rows[0];
-    let postModel;
+    let trickModel;
     try {
-      postModel = fromDbToModel(row);
+      trickModel = fromDbToModel(row);
     } catch (error) {
       debug(error);
-      throw 'Could not save post';
+      throw 'Could not save trick';
     }
-    return postModel;
+    return trickModel;
   }
 
   /**
-   * Get all posts from DB
-   * @returns an array of post model
+   * Get all tricks from DB
+   * @returns an array of trick model
    */
-  async getAll(): Promise<Post[]> {
+  async getAll(): Promise<Trick[]> {
     let res;
     try {
       res = await pool.query('SELECT * from ' + table);
@@ -82,24 +87,24 @@ class PostsAccess {
       throw error;
     }
     const rows = res.rows;
-    let postModels: Post[] = [];
+    let trickModels: Trick[] = [];
     rows.forEach((r) => {
-      let postModel: Post;
+      let trickModel: Trick;
       try {
-        postModel = fromDbToModel(r);
+        trickModel = fromDbToModel(r);
       } catch (error) {
         debug(error);
-        throw 'Could not save post';
+        throw 'Could not save trick';
       }
-      postModels.push(postModel);
+      trickModels.push(trickModel);
     });
-    return postModels;
+    return trickModels;
   }
 
   /**
-   * Delete a post from DB by ID
-   * @param id post ID
-   * @returns whether the post has been deleted
+   * Delete a trick from DB by ID
+   * @param id trick ID
+   * @returns whether the trick has been deleted
    */
   async delete(id: string): Promise<boolean> {
     let res;
@@ -120,12 +125,12 @@ class PostsAccess {
   }
 
   /**
-   * Update a post from DB and return it
-   * @param post post model
-   * @returns a post model
+   * Update a trick from DB and return it
+   * @param trick trick model
+   * @returns a trick model
    */
-  async update(post: Post): Promise<Post> {
-    let postVal = [post.title, post.description, post.imageUrl, post.id];
+  async update(trick: Trick): Promise<Trick> {
+    let trickVal = [trick.title, trick.description, trick.imageUrl, trick.id];
     let res;
     try {
       res = await pool.query(
@@ -137,7 +142,7 @@ class PostsAccess {
           ' image_url = $3' +
           ' WHERE id = $4' +
           ' RETURNING *',
-        postVal
+        trickVal
       );
     } catch (error: any) {
       debug(error);
@@ -145,15 +150,15 @@ class PostsAccess {
     }
     const row = res.rows[0];
 
-    let postModel;
+    let trickModel;
     try {
-      postModel = fromDbToModel(row);
+      trickModel = fromDbToModel(row);
     } catch (error) {
       debug(error);
-      throw 'Could not update post';
+      throw 'Could not update trick';
     }
-    return postModel;
+    return trickModel;
   }
 }
 
-export { PostsAccess };
+export { TricksAccess };
