@@ -4,7 +4,7 @@
 - Create end to end testing for the backend (complete scenario)
 - Improve the validation on the requests
 - Use a UI library for the front end (MUI for instance)
-- Create different environment for development and prod, especially with Auth0
+- Create different environment for development and prod, especially for Auth0 and Docker
 - Use a secret manager for instance AWS Secret Manager
 - Add authorization to the route with oauth scopes
 - Prevent User to access other user's resources

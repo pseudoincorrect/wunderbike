@@ -1,4 +1,4 @@
-## Difficulties
+# **DIFFICULTIES**
 
 - First time using Auth0 (was using either own JWT implementation or AWS cognito), thus I had to learn it almost from scratch
 - Issues with the mocking of the database access
@@ -6,26 +6,41 @@
 - Bit of hesitation between JS and TS
 - Bit of hesitation between a using a project generator or own implementation (I made my own implementation)
 
-## JEST: unwanted test
+<br>
 
-**SYMPTOM** Jest seems to run test that do not exists
+<br>
+<br>
 
-**CAUSE** typescript build directory (dist/) is tested
+# **DOCUMENTED DIFFICULTIES**
 
-**SOLUTION** remove it (dist/)
+<br>
 
-## HTTP: strange validation of a http parameter
+## JEST - UNWANTED TEST
 
-**SYMPTOM** Controller Could not validate a param (id)
+**SYMPTOMS** - Jest seems to run test that do not exists
 
-**CAUSE** the http-rest client strings should not use quotes (")
+**CAUSE** - typescript build directory (dist/) is tested
 
-**SOLUTION** remove the quotes
+**SOLUTION** - remove it (dist/)
 
-## TEMPLATE:
+<br>
 
-**SYMPTOM**
+## HTTP - WRONG VALIDATION OF A HTTP PARAMETER
 
-**CAUSE**
+**SYMPTOMS** - Controller Could not validate a param (id)
 
-**SOLUTION**
+**CAUSE** - the http-rest client strings should not use quotes (")
+
+**SOLUTION** - remove the quotes
+
+<br>
+
+## TEMPLATE -
+
+**SYMPTOMS** -
+
+**CAUSE** -
+
+**SOLUTION** -
+
+<br>

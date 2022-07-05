@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16-alpine AS builder
 
 WORKDIR /home/node/app
 
@@ -6,6 +6,8 @@ COPY ./package*.json ./
 
 RUN npm install
 
-EXPOSE 3000
+FROM builder
 
-CMD ["npm", "run", "start"]
+EXPOSE 80
+
+CMD ["npm", "run", "deploy"]

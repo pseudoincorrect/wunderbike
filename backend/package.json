@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "test": "jest --runInBand --forceExit",
-    "test_clear_cache": "npx rimraf dist ; jest --clearCache"
+    "start": "$env:NODE_ENV = 'development' ; node dist/index.js",
+    "dev": "$env:NODE_ENV = 'development' ; concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "test": "$env:NODE_ENV = 'test' ; jest --runInBand --forceExit",
+    "test_clear_cache": "npx rimraf dist ; jest --clearCache",
+    "deploy": "export DEBUG=* && export NODE_ENV=production && npx tsc && node dist/index.js"
   },
   "author": "Maxime ",
   "license": "MIT",
