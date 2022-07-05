@@ -39,7 +39,22 @@ $ cd docker
 $ docker-compose up
 ```
 
-## Add a few tricks, with Postman
+## Add a few tricks, with Postman or Rest Client (vscode)
+
+### Postman
+
+navigate to "./backend/postman/".
+open the Wunderbike collection with Postman.
+add your token to the variable under the deployment environment.
+send a few requests to test the backend.
+
+### Rest Client (vscode)
+
+navigate to "./backend/rest_client/tricks.http".
+navigate to ".vscode" folder in the root of the repo.
+create and "rest-client.environmentVariables"."$development"."token" variable with your token in it.
+back to tricks.http select the development environment with vscode command palette.
+send a few requests to test the backend.
 
 ## Test manually
 
